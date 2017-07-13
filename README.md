@@ -1,8 +1,8 @@
 ---
-author: Nicola F. M\"uller
+author: Nicola F. Müller
 level: Intermediate
-title: Tutorial template
-subtitle: Template for an empty tutorial
+title: MASCOT
+subtitle: Parameter and State inference using the approximate structured coalescent
 beastversion: 2.4.6
 ---
 
@@ -94,14 +94,30 @@ Next, we have to specify the site model. For Influenza Hemagluttanin sequences a
 <figure>
 	<a id="fig:example1"></a>
 	<img style="width:70%;" src="figures/SiteModel.png" alt="">
-	<figcaption>Figure 1: Guess sampling times.</figcaption>
+	<figcaption>Figure 1: Set the site model.</figcaption>
 </figure>
 
 
+### Set the clock model (Clock Model)
+
+### Specify the priors and set dimensions (Priors)
+Now we need to set the priors as well as the dimensions of the effective population sizes and the migration rates. For this example we have sequences from Australia, Hong Kong, New Zealand and, New York (USA). Overall we have four different locations, meaning that we need and effective popualtions size for each of these locations. You can set the dimension of the effective population size by pressing the _initial_ button. A window will then appear where you can set the dimension to 1. Next, we can change the prior to a Log Normal prior with M=0 and S=4. An exponential distribution would be favoring small values of Ne's, whereas a Log Normal distribution is less informative.
 
 
+<figure>
+	<a id="fig:example1"></a>
+	<img style="width:70%;" src="figures/SetNeDimension.png" alt="">
+	<figcaption>Figure 1: Set the site model.</figcaption>
+</figure>
 
 
+Next, we have to set the dimension of the migration rate parameter. A lineage from any of the 4 locations can migrate to 3 (4-1) other locations. Overall, we therefor have to estimate 4*(4-1) migration rates and have to set the dimension accordingly.
+
+<figure>
+	<a id="fig:example1"></a>
+	<img style="width:70%;" src="figures/SetMigrationDimension.png" alt="">
+	<figcaption>Figure 1: Set the site model.</figcaption>
+</figure>
 
 
 -------

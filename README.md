@@ -111,7 +111,8 @@ Now we need to set the priors as well as the dimensions of the effective populat
 </figure>
 
 
-Next, we have to set the dimension of the migration rate parameter. A lineage from any of the 4 locations can migrate to 3 (4-1) other locations. Overall, we therefor have to estimate 4*(4-1) migration rates and have to set the dimension accordingly.
+Next, we have to set the dimension of the migration rate parameter. A lineage from any of the 4 locations can migrate to 3 (4-1) other locations. Overall, we therefor have to estimate 4*(4-1) migration rates and have to set the dimension accordingly. The exponential distribution as a prior on the migration rate puts much weight on lower values while not prohibiting larger ones.
+
 
 <figure>
 	<a id="fig:example1"></a>
@@ -119,159 +120,63 @@ Next, we have to set the dimension of the migration rate parameter. A lineage fr
 	<figcaption>Figure 1: Set the site model.</figcaption>
 </figure>
 
-
--------
-
-# Tutorial style guide
-
-## Text styling
-
-This is how to write _italic text_.
-
-This is how to write **bold text**.
-
-This is how to write **_bold and italic text_**.
-
-Do text superscripts like this 7^th, x^2y or  x^(2y + 3z).
+Next, we have to set a prior for the clock rate. Since we only have a narrow time window of less than a year and only 80 sequences, there isn't much information in the data about the clock rate. We have however a good idea about it for Influenza A/H3N2 Hemagglutinin. We can therefor set the prior to be normally distributed around 0.005 substitution per site and year with a variance of 0.0001. (At this point we could also fix the rate, but this would require deleting the operators in the xml that act on the clock rate)
 
 
-## Lists
+### Specify the MCMC chain length (MCMC)
 
-### Unnumbered lists
-
-- Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-- Integer pharetra arcu ut nisl mollis ultricies.
-	- Fusce nec tortor at enim cursus dictum.
-	- Phasellus nec urna quis velit eleifend convallis sodales nec augue.
-- In iaculis turpis in massa facilisis, quis ultricies nibh ultricies.
-- Nam vitae turpis eu lacus imperdiet mollis id at augue.
-- Sed sed turpis ac dolor mollis accumsan.
-
-
-### Numbered lists
-
-1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-2. Integer pharetra arcu ut nisl mollis ultricies.
-	1. Fusce nec tortor at enim cursus dictum.
-	2. Phasellus nec urna quis velit eleifend convallis sodales nec augue.
-1. In iaculis turpis in massa facilisis, quis ultricies nibh ultricies.
-1. Nam vitae turpis eu lacus imperdiet mollis id at augue.
-1. Sed sed turpis ac dolor mollis accumsan.
-
-### Mixed lists
-
-1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-2. Integer pharetra arcu ut nisl mollis ultricies.
-	* Fusce nec tortor at enim cursus dictum.
-	* Phasellus nec urna quis velit eleifend convallis sodales nec augue.
-1. In iaculis turpis in massa facilisis, quis ultricies nibh ultricies.
-1. Nam vitae turpis eu lacus imperdiet mollis id at augue.
-1. Sed sed turpis ac dolor mollis accumsan.
-
-
-## Figures
-
+Here we can set the length of the MCMC chain and after how many iterations the parameter and trees a logged. For this dataset, 5 million iterations should be sufficient. In order to avoid producing to large log a trees files, we can set the logEvery to 10000. Next, we have to save the *xml file under _File >> Save as_.
 
 <figure>
 	<a id="fig:example1"></a>
-	<img style="width:25%;" src="figures/Logo_bw.png" alt="">
-	<figcaption>Figure 1: This figure is 25% of the page width.</figcaption>
+	<img style="width:70%;" src="figures/MCMC.png" alt="">
+	<figcaption>Figure 1: load the Mascot template.</figcaption>
 </figure>
 
+### Run the Analysis using BEAST2 (MCMC)
+Run the \*.xml using BEAST2 to test if the xml is actually working and then either use finished runs from the *precooked-runs* folder.
+
+### Analyse the log file using Tracer
+
+First, we can open the \*.log file in tracer to check if the MCMC has converged
 
 <figure>
-	<a id="fig:example2"></a>
-	<img style="width:10%;" src="figures/Logo_bw.png" alt="">
-	<figcaption>Figure 2: This figure is only 10% of the page width.</figcaption>
+	<a id="fig:example1"></a>
+	<img style="width:70%;" src="figures/LogPosterior.png" alt="">
+	<figcaption>Figure 1: load the Mascot template.</figcaption>
 </figure>
 
+<figure>
+	<a id="fig:example1"></a>
+	<img style="width:70%;" src="figures/LogNe.png" alt="">
+	<figcaption>Figure 1: load the Mascot template.</figcaption>
+</figure>
 
+<figure>
+	<a id="fig:example1"></a>
+	<img style="width:70%;" src="figures/LogMigration.png" alt="">
+	<figcaption>Figure 1: load the Mascot template.</figcaption>
+</figure>
 
-# Code
+### Make the mcc tree using TreeAnnotator
 
-A bit of inline monospaced font can be made `like this`. Larger code blocks can be made by using the code environment:
+### look at the mcc tree using FigTree
 
-Java:
-
-```java
-public class HelloWorld {
-
-    public static void main(String[] args) {
-        // Prints "Hello, World" to the terminal window.
-        System.out.println("Hello, World");
-    }
-
-}
-```
-
-XML:
-
-```xml
-	<BirthDeathSkylineModel spec="BirthDeathSkylineModel" id="birthDeath" tree="@tree" contemp="true">
-	      <parameter name="origin" id="origin" value ="100" lower="0."/>    
-	      <parameter name="R0" id="R0" value="2" lower="0." dimension ="10"/>
-	      <parameter name="becomeUninfectiousRate" id="becomeUninfectiousRate" value="1" lower="0." dimension ="10"/>
-	      <parameter name="samplingProportion" id="samplingProportion" value="0."/>
-	      <parameter name="rho" id="rho" value="1e-6" lower="0." upper="1."/>
-	</BirthDeathSkylineModel>
-```
-
-R:
-
-```R
-	> myString <- "Hello, World!"
-	> print (myString)
-	[1] "Hello, World!"
-```
-
-# Equations
-
-Inline equations: {% eqinline \dot{x} = \sigma(y-x) %}
-
-Displayed equations: 
-{% eq \left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right) %}
-
-
-
-## Instruction boxes
-
-Use block-quotes for step-by-step instruction that the user should perform (this will produce a framed box on the website):
-
-> The data we have is not the data we want, and the data we need is not the data we have.
-> 
-> We can input **any** formatted text in here:
->
-> - Even
-> - Lists
->
-> or equations:
->
-> {% eq (x_1, \ldots, x_n) \left( \begin{array}{ccc}
-      \phi(e_1, e_1) & \cdots & \phi(e_1, e_n) \\
-      \vdots & \ddots & \vdots \\
-      \phi(e_n, e_1) & \cdots & \phi(e_n, e_n)
-    \end{array} \right)
-  \left( \begin{array}{c}
-      y_1 \\
-      \vdots \\
-      y_n
-    \end{array} \right) %}
-
-
-
-
-
-
-# Hyperlinks
-
-Add links to figures like this: 
-
-- [Figure 1](#fig:example1) is 25% of the page width.
-- [Figure 2](#fig:example2) is 10% of the page width. 
-
-Add links to external URLs like [this](http://www.google.com). 
-
-Links to equations or different sections within the same document are a little buggy.
+<figure>
+	<a id="fig:example1"></a>
+	<img style="width:70%;" src="figures/HongKong.png" alt="">
+	<figcaption>Figure 1: load the Mascot template.</figcaption>
+</figure>
+<figure>
+	<a id="fig:example1"></a>
+	<img style="width:70%;" src="figures/NewZealand.png" alt="">
+	<figcaption>Figure 1: load the Mascot template.</figcaption>
+</figure>
+<figure>
+	<a id="fig:example1"></a>
+	<img style="width:70%;" src="figures/NewYork.png" alt="">
+	<figcaption>Figure 1: load the Mascot template.</figcaption>
+</figure>
 
 
 ----

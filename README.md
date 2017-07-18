@@ -19,7 +19,7 @@ The structured coalescent on allows to coherently model the migration and coales
 
 ### BEAST2 - Bayesian Evolutionary Analysis Sampling Trees 2
 
-BEAST2 is a free software package for Bayesian evolutionary analysis of molecular sequences using MCMC and strictly oriented toward inference using rooted, time-measured phylogenetic trees {% cite Bouckaert2014 --file Tutorial-Template/master-refs.bib %}. This tutorial uses the BEAST2 version 2.4.2.
+BEAST2 is a free software package for Bayesian evolutionary analysis of molecular sequences using MCMC and strictly oriented toward inference using rooted, time-measured phylogenetic trees. This tutorial uses the BEAST2 version 2.4.2.
 
 ### BEAUti - Bayesian Evolutionary Analysis Utility
 
@@ -39,7 +39,7 @@ TreeAnnotator is a program that comes with BEAST2. It allows to summarize the an
 
 # Practical: Parameter and State inference using the approximate structured coalescent
 
-In this tutorial we will estimate migration rates, effective population sizes and locations of internal nodes using the marginal approximation of the structured coalescent implemented in BEAST2, Mascot {% cite Mueller2017 --file Structured-coalescent/master-refs %}.
+In this tutorial we will estimate migration rates, effective population sizes and locations of internal nodes using the marginal approximation of the structured coalescent implemented in BEAST2, Mascot.
 
 The aim is to:
 
@@ -205,7 +205,7 @@ We can now open the mcc tree using FigTree. The output contains several things. 
 
 # Useful Links
 
-- [Bayesian Evolutionary Analysis with BEAST 2](http://www.beast2.org/book.html) {% cite BEAST2book2014 --file Tutorial-Template/master-refs.bib %}
+- [Bayesian Evolutionary Analysis with BEAST 2](http://www.beast2.org/book.html) 
 - BEAST 2 website and documentation: [http://www.beast2.org/](http://www.beast2.org/)
 - BEAST 1 website and documentation: [http://beast.bio.ed.ac.uk](http://beast.bio.ed.ac.uk)
 - Join the BEAST user discussion: [http://groups.google.com/group/beast-users](http://groups.google.com/group/beast-users) 
@@ -214,4 +214,3 @@ We can now open the mcc tree using FigTree. The output contains several things. 
 
 # Relevant References
 
-{% bibliography --cited --file Tutorial-Template/master-refs.bib %}

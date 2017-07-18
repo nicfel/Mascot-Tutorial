@@ -58,7 +58,7 @@ First, we have to download the package Mascot using the BEAUTi package manager. 
 <figure>
 	<a id="fig:example1"></a>
 	<img style="width:50%;" src="figures/MascotDownload.png" alt="">
-	<figcaption>Figure 1: load the Mascot template.</figcaption>
+	<figcaption>Figure 1: Download the Mascot package.</figcaption>
 </figure>
 
 
@@ -150,7 +150,7 @@ First, we can open the \*.log file in tracer to check if the MCMC has converged.
 <figure>
 	<a id="fig:example1"></a>
 	<img style="width:70%;" src="figures/LogPosterior.png" alt="">
-	<figcaption>Figure 1: load the Mascot template.</figcaption>
+	<figcaption>Figure 8: Check if the posterior converged.</figcaption>
 </figure>
 
 
@@ -160,7 +160,7 @@ Next, we can have a look at the inferred effective population sizes. New York is
 <figure>
 	<a id="fig:example1"></a>
 	<img style="width:70%;" src="figures/LogNe.png" alt="">
-	<figcaption>Figure 1: load the Mascot template.</figcaption>
+	<figcaption>Figure 9: Compare the different inferred effective population sizes.</figcaption>
 </figure>
 
 In this example, we have relatively little information about the effective population sizes of each location. This can lead to estimates that are greatly informed by the prior. Additionally, there can be great differences between median and mean estimates. The median estimates are generally more reliable since they are less influence by extreme values. 
@@ -168,7 +168,7 @@ In this example, we have relatively little information about the effective popul
 <figure>
 	<a id="fig:example1"></a>
 	<img style="width:70%;" src="figures/MeanMedian.png" alt="">
-	<figcaption>Figure 1: load the Mascot template.</figcaption>
+	<figcaption>Figure 10: Differences between Mean and Meadian estimates.</figcaption>
 </figure>
 
 We then can look at the inferred migration rates. The migration rates have the lable b_migration.*, meaning that they are backwards in time migration rates. The highest rates are from New York to Hong Kong. Because they are backwards in time migration rates, this means that lineage from New York are inferred to be likely from Hong Kong if we're going backwards in time. In the inferred phylogenies, we should therefor make the observation that a lot ancestral lineages are inferred to be from the Hong Kong backwards.
@@ -176,7 +176,7 @@ We then can look at the inferred migration rates. The migration rates have the l
 <figure>
 	<a id="fig:example1"></a>
 	<img style="width:70%;" src="figures/LogMigration.png" alt="">
-	<figcaption>Figure 1: load the Mascot template.</figcaption>
+	<figcaption>Figure 11: Compare the inferrred migration rates.</figcaption>
 </figure>
 
 ### Make the mcc tree using TreeAnnotator
@@ -185,7 +185,7 @@ Next, we want to summarize the trees. This we can do using treeAnnotator. Open t
 <figure>
 	<a id="fig:example1"></a>
 	<img style="width:50%;" src="figures/TreeAnnotator.png" alt="">
-	<figcaption>Figure 1: load the Mascot template.</figcaption>
+	<figcaption>Figure 12: Make the maximum clade credibility tree.</figcaption>
 </figure>
 
 ### Check the mcc tree using FigTree
@@ -197,7 +197,7 @@ We can now open the mcc tree using FigTree. The output contains several things. 
 	<img style="width:100%;" src="figures/HongKongLabels.png" alt="">
 	<img style="width:100%;" src="figures/NewZealandLabels.png" alt="">
 	<img style="width:100%;" src="figures/NewYorkLabels.png" alt="">
-	<figcaption>Figure 1: load the Mascot template.</figcaption>
+	<figcaption>Figure 13: Compare the inferred node probabilities.</figcaption>
 </figure>
 
 

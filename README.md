@@ -4,6 +4,8 @@ level: Intermediate
 title: MASCOT Tutorial
 subtitle: Parameter and State inference using the approximate structured coalescent
 beastversion: 2.4.7
+tracerversion: 1.6.0
+figtreeversion: 1.4.2
 ---
 
 

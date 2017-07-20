@@ -140,7 +140,7 @@ Next, we have to set a prior for the clock rate. Since we only have a narrow tim
 
 ### Specify the MCMC chain length (MCMC)
 
-Here we can set the length of the MCMC chain and after how many iterations the parameter and trees a logged. For this dataset, 2 million iterations should be sufficient. In order to have enough samples but not create too large files, we can set the logEvery to 5000, so we have 401 samples overall. Next, we have to save the *.xml file under _File >> Save as_.
+Here we can set the length of the MCMC chain and after how many iterations the parameter and trees a logged. For this dataset, 2 million iterations should be sufficient. In order to have enough samples but not create too large files, we can set the logEvery to 2500, so we have 801 samples overall. Next, we have to save the *.xml file under _File >> Save as_.
 
 <figure>
 	<a id="fig:example1"></a>

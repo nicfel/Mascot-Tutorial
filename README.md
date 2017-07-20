@@ -234,3 +234,5 @@ We can now check if lineages ancestral to samples from New York are actually inf
 
 # Relevant References
 
+{% bibliography --cited --file MASCOT-Tutorial/master-refs %}
+

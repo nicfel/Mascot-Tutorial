@@ -13,7 +13,7 @@ figtreeversion: 1.4.2
 
 Phylogeographic methods can help reveal the movement of genes between populations of organisms. This has been widely used to quantify pathogen movement between different host populations, the migration history of humans, and the geographic spread of languages or the gene flow between species using the location or state of samples alongside sequence data. Phylogenies therefore offer insights into migration processes not available from classic epidemiological or occurrence data alone. 
 
-The structured coalescent allows to coherently model the migration and coalescent process, but struggles with complex datasets due to the need to infer ancestral migration histories. Thus, approximations to the structured coalescent, which integrate over all ancestral migration histories, have been developed. This tutorial gives an introduction into how a MASCOT analysis in BEAST2 can be set-up. MASCOT is short for **M**arginal **A**pproximation of the **S**tructured **CO**alescen **T** and implements a structured coalescent approximation {% cite Mueller2017 --file MASCOT-Tutorial/master-refs %}. This approximation doesn't require migration histories to be sampled using MCMC and therefore allows to analyse phylogenies with more than three or four states.
+The structured coalescent allows to coherently model the migration and coalescent process, but struggles with complex datasets due to the need to infer ancestral migration histories. Thus, approximations to the structured coalescent, which integrate over all ancestral migration histories, have been developed. This tutorial gives an introduction into how a MASCOT analysis in BEAST2 can be set-up. MASCOT is short for **M**arginal **A**pproximation of the **S**tructured **CO**alescen **T** and implements a structured coalescent approximation {% cite Mueller2017 --file Mascot-Tutorial/master-refs %}. This approximation doesn't require migration histories to be sampled using MCMC and therefore allows to analyse phylogenies with more than three or four states.
 
 ----
 
@@ -21,7 +21,7 @@ The structured coalescent allows to coherently model the migration and coalescen
 
 ### BEAST2 - Bayesian Evolutionary Analysis Sampling Trees 2
 
-BEAST2 ([http://www.beast2.org](http://www.beast2.org)) is a free software package for Bayesian evolutionary analysis of molecular sequences using MCMC and strictly oriented toward inference using rooted, time-measured phylogenetic trees. This tutorial is written for BEAST v{{ page.beastversion }} {% cite BEAST2book2014 --file MASCOT-Tutorial/master-refs %}. 
+BEAST2 ([http://www.beast2.org](http://www.beast2.org)) is a free software package for Bayesian evolutionary analysis of molecular sequences using MCMC and strictly oriented toward inference using rooted, time-measured phylogenetic trees. This tutorial is written for BEAST v{{ page.beastversion }} {% cite BEAST2book2014 --file Mascot-Tutorial/master-refs %}. 
 
 
 ### BEAUti2 - Bayesian Evolutionary Analysis Utility
@@ -217,7 +217,7 @@ We can now check if lineages ancestral to samples from New York are actually inf
 # Useful Links
 
 - MASCOT source code: [https://github.com/nicfel/Mascot](https://github.com/nicfel/Mascot)
-- [Bayesian Evolutionary Analysis with BEAST 2](http://www.beast2.org/book.html) {% cite BEAST2book2014 --file MASCOT-Tutorial/master-refs.bib %}
+- [Bayesian Evolutionary Analysis with BEAST 2](http://www.beast2.org/book.html) {% cite BEAST2book2014 --file Mascot-Tutorial/master-refs.bib %}
 - BEAST 2 website and documentation: [http://www.beast2.org/](http://www.beast2.org/)
 - Join the BEAST user discussion: [http://groups.google.com/group/beast-users](http://groups.google.com/group/beast-users) 
 
@@ -225,5 +225,5 @@ We can now check if lineages ancestral to samples from New York are actually inf
 
 # Relevant References
 
-{% bibliography --cited --file MASCOT-Tutorial/master-refs %}
+{% bibliography --cited --file Mascot-Tutorial/master-refs %}
 

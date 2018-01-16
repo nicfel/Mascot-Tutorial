@@ -139,11 +139,12 @@ For rapidly evolving viruses, the assumption of a strict molecular clock is ofte
 ### Specify the priors (Priors)
 Now, we need to set the priors for the various parameters of the model. We do this by switching to the "Priors" tab.
 
-First, change the prior for the effective population size parameter to be a Log Normal prior with M=0 and S=1. Since we have only a few samples per location, meaning little information about the different effective population sizes, we will need an informative prior.
+First, consider the effective population size parameter.  Since we have only a few samples per location, meaning little information about the different effective population sizes, we will need an informative prior. In this case we will use a log normal prior with parameters M=0 and S=1.  (These are respectively the mean and variance of the corresponding normal distribution in log space.)  To use this prior, choose "Log Normal" from the dropdown menu to the right of the Ne.t:H3N2 parameter label, then click the arrow to the left of the same label and fill in the parameter values appropriately (i.e. M=0 and S=1.). Ensure that the "mean in real space" checkbox remains unchecked.
 
-The existing exponential distribution as a prior on the migration rate puts much weight on lower values while not prohibiting larger ones. For migration rates, a prior that prohibits too large values while not greatly distinguishing between very small and very *very* small values is generally a good choice. Be aware however that the exponential distirbution is quite an informative prior: one should be careful that to choose a mean so that feasible rates are not excluded.
+The existing exponential distribution as a prior on the migration rate puts much weight on lower values while not prohibiting larger ones. For migration rates, a prior that prohibits too large values while not greatly distinguishing between very small and very *very* small values is generally a good choice. Be aware however that the exponential distirbution is quite an informative prior: one should be careful that to choose a mean so that feasible rates
+are at least within the 95% HPD interval of the prior.  (This can be determined by clicking the arrow to the left of the parameter name and looking at the values below the graph that appears on the right.)
 
-Finally, set the prior for the clock rate. Since we only have a narrow time window of less than a year and only 24 sequences, there isn't much information in the data about the clock rate. We have however a good idea about it for Influenza A/H3N2 Hemagglutinin. We can therefore set the prior to be normally distributed around 0.005 substitution per site per year with a variance of 0.0001. (At this point we could also just fix the rate)
+Finally, set the prior for the clock rate. Since we only have a narrow sampling time window of less than two years and only 24 sequences, there isn't much information in the data about the clock rate. We have however a good idea about it for Influenza A/H3N2 Hemagglutinin. We can therefore set the prior to be normally distributed around 0.005 substitution per site per year with a variance of 0.0001. (At this point we could also just fix the rate)
 
 <figure>
 	<a id="fig:example1"></a>
@@ -154,7 +155,13 @@ Finally, set the prior for the clock rate. Since we only have a narrow time wind
 
 ### Specify the MCMC chain length (MCMC)
 
-Here we can set the length of the MCMC chain and after how many iterations the parameter and trees a logged. For this dataset, 2 million iterations should be sufficient. In order to have enough samples but not create too large files, we can set the logEvery to 2500, so we have 801 samples overall. Next, we have to save the `*.xml` file under _File >> Save as_.
+Now switch to the "MCMC" tab. Here we can set the length of the MCMC
+chain and decide how frequently the parameter and trees are
+logged. For this dataset, 2 million iterations should be
+sufficient. In order to have enough samples but not create too large
+files, we can set the logEvery to 5000, so we have 401 samples
+overall. Next, we have to save the `*.xml` file using _File >> Save
+as_.
 
 <figure>
 	<a id="fig:example1"></a>
@@ -167,7 +174,7 @@ Run the `*.xml` using BEAST2 or use finished runs from the *precooked-runs* fold
 
 ### Analyse the log file using Tracer
 
-First, we can open the `*.log` file in tracer to check if the MCMC has converged. The ESS value should be above 200 for almost all values and especially for the posterior estimates. The burnin taken by Tracer is 10%, but for this analysis 1% is enough.
+First, we can open the `*.log` file in tracer to check if the MCMC has converged. The ESS value should be above 200 for almost all values and especially for the posterior estimates.
 
 <figure>
 	<a id="fig:example1"></a>
@@ -175,9 +182,7 @@ First, we can open the `*.log` file in tracer to check if the MCMC has converged
 	<figcaption>Figure 8: Check if the posterior converged.</figcaption>
 </figure>
 
-
-
-Next, we can have a look at the inferred effective population sizes. New York is inferred to have the largest effective population size before Hong Kong and New Zealand. This tells us that two lineages that are in the New Zealand are expected to coalesce quicker than two lineages in Hong Kong or New York.
+We can have a look at the marginal posterior distributions for the effective population sizes. New York is inferred to have the largest effective population size before Hong Kong and New Zealand. This tells us that two lineages that are in New Zealand are expected to coalesce quicker than two lineages in Hong Kong or New York.
 
 <figure>
 	<a id="fig:example1"></a>
@@ -193,7 +198,7 @@ In this example, we have relatively little information about the effective popul
 	<figcaption>Figure 10: Differences between Mean and Meadian estimates.</figcaption>
 </figure>
 
-We can then look at the inferred migration rates. The migration rates have the label b_migration.*, meaning that they are backwards in time migration rates. The highest rates are from New York to Hong Kong. Because they are backwards in time migration rates, this means that lineages from New York are inferred to be likely from Hong Kong if we're going backwards in time. In the inferred phylogenies, we should therefore make the observation that lineages ancestral to samples from New York are inferred to be from the Hong Kong backwards.
+We can then look at the inferred migration rates. The migration rates have the label b_migration.*, meaning that they are backwards in time migration rates. The highest rates are from New York to Hong Kong. Because they are backwards in time migration rates, this means that lineages from New York are inferred to be likely from Hong Kong if we're going backwards in time. In the inferred phylogenies, we should therefore make the observation that lineages ancestral to samples from New York are inferred to be from Hong Kong backwards.
 
 <figure>
 	<a id="fig:example1"></a>
@@ -202,7 +207,8 @@ We can then look at the inferred migration rates. The migration rates have the l
 </figure>
 
 ### Make the MCC tree using TreeAnnotator
-Next, we want to summarize the trees. This we can do using treeAnnotator. Open the programm and then set the options as below. You have to specify the _Burnin precentage_, the _Node heights_, _Input Tree File_ and the _Output File_ after clicking _Run_ the programm should summarize the trees.
+
+Next, we want to summarize the trees. This we can do using TreeAnnotator. Open the program and then set the options as below. You have to specify the _Burnin percentage_, the _Node heights_, _Input Tree File_ and the _Output File_. After clicking _Run_ the program should summarize the trees.
 
 <figure>
 	<a id="fig:example1"></a>
@@ -210,8 +216,11 @@ Next, we want to summarize the trees. This we can do using treeAnnotator. Open t
 	<figcaption>Figure 12: Make the maximum clade credibility tree.</figcaption>
 </figure>
 
-### Check the MCC tree using FigTree
-We can now open the MCC tree using FigTree. The output contains several things. Each node has several traits. Among them are those called Hong_Kong, New_York and New_Zealand. The value of those traits is the probability of that node being in that location as inferred using MASCOT. 
+### Examine the MCC tree using FigTree
+
+We can now open the MCC tree using FigTree. To do this, run FigTree and choose _File >> Open_. Using the dialog box, select the file "mcc.trees" generated by TreeAnnotator.
+
+Each node in the displayed tree has several traits. Among them are those called Hong_Kong, New_York and New_Zealand. The value of those traits is the probability of that node being in that location as inferred using MASCOT. To view these probability values, select the "Node Labels" checkbox and click the arrow immediately to the left of this pox to expand it. Selecting Hong_Kong, New_York and New_Zealand from the "Display" drop-down menu will cause the probabilities of the internal nodes being in each of these states to be displayed on the tree, as shown in the figures below.
 
 
 <figure>
@@ -222,7 +231,7 @@ We can now open the MCC tree using FigTree. The output contains several things. 
 	<figcaption>Figure 13: Compare the inferred node probabilities.</figcaption>
 </figure>
 
-We can now check if lineages ancestral to samples from New York are actually inferred to be from Hong Kong, or the probability of the root being in any of the locations. It should here be mentioned that the inference of nodes being in a particular location makes some simplifying assumptions, such as that there are no other locations where lineages could have been.
+We can now determine if lineages ancestral to samples from New York are actually inferred to be from Hong Kong, or the probability of the root being in any of the locations. It should here be mentioned that the inference of nodes being in a particular location makes some simplifying assumptions, such as that there are no other locations (i.e. apart from the sampled locations) where lineages could have been.
 
 ----
 

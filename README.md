@@ -107,17 +107,17 @@ clicking the _Guess_ button, you can split the sequence on the
 vertical bar "|" again by selecting "split on character" and entering
 "|" in the box. However, the locations are in the fourth group, so
 this time choose "4" from the drop-down menu. After clicking the _OK_
-button, the window should now look like in the figure below:
+button, the window should look like the one shown in the figure below:
 
 <figure>
 	<a id="fig:example1"></a>
 	<img style="width:70%;" src="figures/TipLocations.png" alt="">
-	<figcaption>Figure 3: Guess sampling locations.</figcaption>
+	<figcaption>Figure 3: Configuring sample locations.</figcaption>
 </figure>
 
 ### Specify the Site Model (Site Model)
 
-Next, we have to specify the site model. For Influenza Hemagluttanin sequences as we have here, HKY is the most commonly used model of nucleotide evolution. It allows for difference in transversion and transition rates. Meaning that changes between bases that are chemically closer related (transitions) are allowed to have a different rate than changes between bases that chemically more distinct (transversion). Additionally, we should allow for different rate categories for different sires in the alignment. This can be done by setting the _Gamma Category Count_ to 4, which is just a value that has typically been used. Make sure that estimate is checked next to the shape parameter. To reduce the number of parameters we have to estimate, we can set Frequencies to Empirical.
+Next, we have to specify the site model. To do this, choose the "Site Model" tab. For Influenza Hemagluttanin sequences as we have here, HKY is the most commonly used model of nucleotide evolution. This model allows for differences in transversion and transition rates, meaning that changes between bases that are chemically more closely related (transitions) are allowed to have a different rate to changes between bases that chemically more distinct (transversions). Additionally, we should allow for different rate categories for different sires in the alignment. This can be done by setting the _Gamma Category Count_ to 4, which is just a value that has typically been used. Make sure that estimate is checked next to the shape parameter. To reduce the number of parameters we have to estimate, we can set Frequencies to Empirical.
 
 <figure>
 	<a id="fig:example1"></a>
@@ -137,9 +137,13 @@ For rapidly evolving viruses, the assumption of a strict molecular clock is ofte
 </figure>
 
 ### Specify the priors (Priors)
-Now, we need to set the priors of the effective population sizes and the migration rates. Next, we can change the prior to a Log Normal prior with M=0 and S=1. Since we have only a few samples per location, meaning little information about the different effective population sizes, we will need an informative prior.
-Next, we have to set the dimension of the migration rate parameter. The exponential distribution as a prior on the migration rate puts much weight on lower values while not prohibiting larger ones. For migration rates, a prior that prohibits too large values while not greatly distinguishing between very small and very very small values (such as the inverse uniform) is generally a good choice.
-Next, we have to set a prior for the clock rate. Since we only have a narrow time window of less than a year and only 24 sequences, there isn't much information in the data about the clock rate. We have however a good idea about it for Influenza A/H3N2 Hemagglutinin. We can therefore set the prior to be normally distributed around 0.005 substitution per site and year with a variance of 0.0001. (At this point we could also just fix the rate)
+Now, we need to set the priors for the various parameters of the model. We do this by switching to the "Priors" tab.
+
+First, change the prior for the effective population size parameter to be a Log Normal prior with M=0 and S=1. Since we have only a few samples per location, meaning little information about the different effective population sizes, we will need an informative prior.
+
+The existing exponential distribution as a prior on the migration rate puts much weight on lower values while not prohibiting larger ones. For migration rates, a prior that prohibits too large values while not greatly distinguishing between very small and very *very* small values is generally a good choice. Be aware however that the exponential distirbution is quite an informative prior: one should be careful that to choose a mean so that feasible rates are not excluded.
+
+Finally, set the prior for the clock rate. Since we only have a narrow time window of less than a year and only 24 sequences, there isn't much information in the data about the clock rate. We have however a good idea about it for Influenza A/H3N2 Hemagglutinin. We can therefore set the prior to be normally distributed around 0.005 substitution per site per year with a variance of 0.0001. (At this point we could also just fix the rate)
 
 <figure>
 	<a id="fig:example1"></a>

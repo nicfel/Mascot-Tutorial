@@ -82,7 +82,7 @@ Next, we have to load the BEAUTi template from _File_, select _Template >> Masco
 
 ### Loading the Influenza A/H3N2 Sequences (Partitions)
 
-The sequences from the _data_ folder name _H3N2.nexus_ can be either drag and dropped into BEAUti or added by going to _File >> Import Alignment_. Once the sequences are added, we need to specify the sampling dates and locations. 
+The sequence alignment is in the file [H3N2.nexus](http://github.com/tgvaughan/Mascot-Tutorial/raw/master/data/H3N2.nexus) can be either drag and dropped into BEAUti or added by going to _File >> Import Alignment_. Once the sequences are added, we need to specify the sampling dates and locations. 
 
 ### Get the sampling times (Tip Dates)
 

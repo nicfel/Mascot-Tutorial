@@ -82,12 +82,13 @@ Next, we have to load the BEAUTi template from _File_, select _Template >> Masco
 
 ### Loading the Influenza A/H3N2 Sequences (Partitions)
 
-The sequence alignment is in the file [H3N2.nexus](http://github.com/tgvaughan/Mascot-Tutorial/raw/master/data/H3N2.nexus) can be either drag and dropped into BEAUti or added by going to _File >> Import Alignment_. Once the sequences are added, we need to specify the sampling dates and locations. 
+The sequence alignment is in the file [H3N2.nexus](http://github.com/nicfel/Mascot-Tutorial/raw/master/data/H3N2.nexus). Right-click on this link and save it to a folder on your computer. Once downloaded, this file can either be drag-and-dropped into BEAUti or added by using BEAUti's menu system via _File >> Import Alignment_. Once the sequences are added, we need to specify the sampling dates and locations. 
 
 ### Get the sampling times (Tip Dates)
 
+Open the "Tip Dates" panel and then select the "Use tip dates" checkbox.
 
-After clicking the _Auto-configure_ button, the sampling times can be guessed. The sampling times are encoded in the sequence names and are in the third group after splitting on the vertical bar "|". The first group after splitting is the name of the sequence, the second group contains the accession numbers. The third are the sampling times and the fourth are the sampling location.
+The sampling times are encoded in the sequence names.  We can tell BEAUti to use these by clicking the _Auto-configure_ button. The sampling times appear following the third vertical bar "|" in the sequence name. To extract these times, select "split on character", enter "|" (without the quotes) in the text box immediately to the right, and then select "3" from the drob-down box to the right, as shown in the figure below. 
 
 <figure>
 	<a id="fig:example1"></a>
@@ -95,7 +96,7 @@ After clicking the _Auto-configure_ button, the sampling times can be guessed. T
 	<figcaption>Figure 2: Guess sampling times.</figcaption>
 </figure>
 
-After guessing the sampling times, the column **Date** should now have values between 2000 and 2002 and the column **Height** should have values from 0 to 2. The heights denote the time difference from a sequence to the most recently sampled sequence. If everything is specified correctly, the sequence with Height 0.0 should have Date 2001.9. Next, the sampling locations need to be specified.
+Clicking "Ok" should now populate the table with the sample times extracted from the sequence names: the column **Date** should now have values between 2000 and 2002 and the column **Height** should have values from 0 to 2. The heights denote the time difference from a sequence to the most recently sampled sequence. If everything is specified correctly, the sequence with Height 0.0 should have Date 2001.9. Next, the sampling locations need to be specified.
 
 ### Get the sampling locations (Tip Locations)
 

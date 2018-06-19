@@ -4,7 +4,7 @@ level: Intermediate
 title: MASCOT v1.0.0 Tutorial
 subtitle: Parameter and State inference using the approximate structured coalescent
 beastversion: 2.5
-tracerversion: 1.6.0
+tracerversion: 1.7.0
 figtreeversion: 1.4.2
 ---
 
@@ -199,7 +199,9 @@ In this example, we have relatively little information about the effective popul
 	<figcaption>Figure 10: Differences between Mean and Meadian estimates.</figcaption>
 </figure>
 
-We can then look at the inferred migration rates. The migration rates have the label b_migration.*, meaning that they are backwards in time migration rates. The highest rates are from New York to Hong Kong. Because they are backwards in time migration rates, this means that lineages from New York are inferred to be likely from Hong Kong if we're going backwards in time. In the inferred phylogenies, we should therefore make the observation that lineages ancestral to samples from New York are inferred to be from Hong Kong backwards.
+We can then look at the inferred migration rates. The migration rates have the label b_migration.*, meaning that they are backwards in time migration rates. The highest rates are from New York to Hong Kong. Because they are backwards in time migration rates, this means that lineages from New York are inferred to be likely from Hong Kong if we're going backwards in time. In the inferred phylogenies, we should therefore make the observation that lineages ancestral to samples from New York are inferred to be from Hong Kong backwards. 
+
+A more in depth explanation of what backwards migration really are can be found here [http://popgen.sc.fsu.edu/Migrate/Blog/Entries/2013/3/22_forward-backward_migration_rates.html](http://popgen.sc.fsu.edu/Migrate/Blog/Entries/2013/3/22_forward-backward_migration_rates.html)
 
 <figure>
 	<a id="fig:example1"></a>
@@ -223,15 +225,18 @@ In each logging step of the tree during the MCMC, MASCOT logs several different 
 After opening the MCC tree in FigTree, we can visualize several things.
 To color branches, you can go to _Appearance >> Colour by_ and select *max*. This is the location that was inferred to be most often the most likely location of the node.
 
-To get the actual inferred probabilities of each node being in any of the 3 locations, you can go to _Node Labels >> Display_ an then choose Hong\_Kong, New\_York or New\_Zealand. These are the actual inferred probabilities of the nodes being in any location. 
-
 <figure>
-	<a id="fig:example1"></a>
-	<img style="width:100%;" src="figures/ColorsTree.png" alt="">
-	<figcaption>Figure 13: Inferred node locations.</figcaption>
+<a id="fig:example1"></a>
+<img style="width:100%;" src="figures/ColorsTree.png" alt="">
+<figcaption>Figure 13: Inferred node locations.</figcaption>
 </figure>
 
-We can now determine if lineages ancestral to samples from New York are actually inferred to be from Hong Kong, or the probability of the root being in any of the locations. It should here be mentioned that the inference of nodes being in a particular location makes some simplifying assumptions, such as that there are no other locations (i.e. apart from the sampled locations) where lineages could have been.
+We can now determine if lineages ancestral to samples from New York are actually inferred to be from Hong Kong, or the probability of the root being in any of the locations. 
+
+To get the actual inferred probabilities of each node being in any of the 3 locations, you can go to _Node Labels >> Display_ an then choose Hong\_Kong, New\_York or New\_Zealand. These are the actual inferred probabilities of the nodes being in any location. 
+
+
+It should however be mentioned that the inference of nodes being in a particular location makes some simplifying assumptions, such as that there are no other locations (i.e. apart from the sampled locations) where lineages could have been.
 
 ----
 

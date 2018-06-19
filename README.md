@@ -140,13 +140,11 @@ For rapidly evolving viruses, the assumption of a strict molecular clock is ofte
 
 Now, we need to set the priors for the various parameters of the model. We do this by switching to the "Priors" tab.
 
-First, consider the effective population size parameter.  Since we have only a few samples per location, meaning little information about the different effective population sizes, we will need an informative prior. In this case we will use a log normal prior with parameters M=0 and S=1.  (These are respectively the mean and variance of the corresponding normal distribution in log space.)  To use this prior, choose "Log Normal" from the dropdown menu to the right of the Ne.t:H3N2 parameter label, then click the arrow to the left of the same label and fill in the parameter values appropriately (i.e. M=0 and S=1.). Ensure that the "mean in real space" checkbox remains unchecked.
+First, consider the effective population size parameter.  Since we have only a few samples per location, meaning little information about the different effective population sizes, we will need an informative prior. In this case we will use a log normal prior with parameters M=0 and S=1.  (These are respectively the mean and variance of the corresponding normal distribution in log space.)  To use this prior, choose "Log Normal" from the dropdown menu to the right of the Ne.t:H3N2 parameter label, then click the arrow to the left of the same label and fill in the parameter values appropriately (i.e. M=0 and S=1). Ensure that the "mean in real space" checkbox remains unchecked.
 
-The existing exponential distribution as a prior on the migration rate puts much weight on lower values while not prohibiting larger ones. For migration rates, a prior that prohibits too large values while not greatly distinguishing between very small and very *very* small values is generally a good choice. Be aware however that the exponential distirbution is quite an informative prior: one should be careful that to choose a mean so that feasible rates
-are at least within the 95% HPD interval of the prior.  (This can be determined by clicking the arrow to the left of the parameter name and looking at the values below the graph that appears on the right.)
+The existing exponential distribution as a prior on the migration rate puts much weight on lower values while not prohibiting larger ones. For migration rates, a prior that prohibits too large values while not greatly distinguishing between very small and very *very* small values is generally a good choice. Be aware however that the exponential distirbution is quite an informative prior: one should be careful that to choose a mean so that feasible rates are at least within the 95% HPD interval of the prior.  (This can be determined by clicking the arrow to the left of the parameter name and looking at the values below the graph that appears on the right.)
 
-Finally, set the prior for the clock rate. Since we only have a narrow sampling time window of less than two years and only 24 sequences, there isn't much information in the data about the clock rate. We have however a good idea about it for Influenza A/H3N2 Hemagglutinin. We can therefore set the prior to be normally distributed around 0.005 substitution per site per year with a variance of 0.0001. (At this point we could also just fix the rate)
-
+Finally, set the prior for the clock rate. We have a good idea about the clock rate of Influenza A/H3N2 Hemagglutinin. From previous work by other people, we know that the clock rate will be around 0.005 substitution per site per year. To include that prior knowledger, we can set the prior on the clock rate to a log normal distribution with mean in **real space**. To specify the mean in real space, make sure that the box *Mean In Real Space* is checked. If we set the S value to 0.25, we say that we expect the clock rate to be with 95% certainty between 0.00321 and 0.00731. 
 <figure>
 	<a id="fig:example1"></a>
 	<img style="width:70%;" src="figures/Priors.png" alt="">
@@ -171,7 +169,8 @@ as_.
 </figure>
 
 ### Run the Analysis using BEAST2
-Run the `*.xml` using BEAST2 or use finished runs from the *precooked-runs* folder. The analysis should take about 6 to 7 minutes. 
+
+Run the `*.xml` using BEAST2 or use finished runs from the *precooked-runs* folder. The analysis should take about 6 to 7 minutes. If you want to learn some more about what the migration rates we actually estimate, have a look at this blog post of Peter Beerli [http://popgen.sc.fsu.edu/Migrate/Blog/Entries/2013/3/22_forward-backward_migration_rates.html](http://popgen.sc.fsu.edu/Migrate/Blog/Entries/2013/3/22_forward-backward_migration_rates.html).
 
 ### Analyse the log file using Tracer
 
@@ -235,8 +234,9 @@ We can now determine if lineages ancestral to samples from New York are actually
 
 To get the actual inferred probabilities of each node being in any of the 3 locations, you can go to _Node Labels >> Display_ an then choose Hong\_Kong, New\_York or New\_Zealand. These are the actual inferred probabilities of the nodes being in any location. 
 
-
 It should however be mentioned that the inference of nodes being in a particular location makes some simplifying assumptions, such as that there are no other locations (i.e. apart from the sampled locations) where lineages could have been.
+
+Another important thing to know is that currently, we assume rates to be constant. This means that we assume that the population size of the different locations does not change over time. We also make the same assumption about the migration rates throught time. 
 
 ----
 

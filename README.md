@@ -11,17 +11,17 @@ figtreeversion: 1.4.2
 
 # Background
 
-Phylogeographic methods can help reveal the movement of genes between populations of organisms. This has been widely used to quantify pathogen movement between different host populations, the migration history of humans, and the geographic spread of languages or the gene flow between species using the location or state of samples alongside sequence data. Phylogenies therefore offer insights into migration processes not available from classic epidemiological or occurrence data alone. 
+Phylogeographic methods can help reveal the movement of genes between populations of organisms. This has been widely used to quantify pathogen movement between different host populations, the migration history of humans, and the geographic spread of languages or the gene flow between species using the location or state of samples alongside sequence data. Phylogenies therefore offer insights into migration processes not available from classic epidemiological or occurrence data alone.
 
 The structured coalescent allows to coherently model the migration and coalescent process, but struggles with complex datasets due to the need to infer ancestral migration histories. Thus, approximations to the structured coalescent, which integrate over all ancestral migration histories, have been developed. This tutorial gives an introduction into how a MASCOT analysis in BEAST2 can be set-up. MASCOT is short for **M**arginal **A**pproximation of the **S**tructured **CO**alescen **T**  {% cite mueller2017mascot --file Mascot-Tutorial/master-refs %} and implements a structured coalescent approximation {% cite Mueller2017 --file Mascot-Tutorial/master-refs %}. This approximation doesn't require migration histories to be sampled using MCMC and therefore allows to analyse phylogenies with more than three or four states.
 
 ----
 
-# Programs used in this Exercise 
+# Programs used in this Exercise
 
 ### BEAST2 - Bayesian Evolutionary Analysis Sampling Trees 2
 
-BEAST2 ([http://www.beast2.org](http://www.beast2.org)) is a free software package for Bayesian evolutionary analysis of molecular sequences using MCMC and strictly oriented toward inference using rooted, time-measured phylogenetic trees. This tutorial is written for BEAST v{{ page.beastversion }} {% cite BEAST2book2014 --file Mascot-Tutorial/master-refs %}. 
+BEAST2 ([http://www.beast2.org](http://www.beast2.org)) is a free software package for Bayesian evolutionary analysis of molecular sequences using MCMC and strictly oriented toward inference using rooted, time-measured phylogenetic trees. This tutorial is written for BEAST v{{ page.beastversion }} {% cite BEAST2book2014 --file Mascot-Tutorial/master-refs %}.
 
 
 ### BEAUti2 - Bayesian Evolutionary Analysis Utility
@@ -64,7 +64,7 @@ The aim is to:
 ## Setting up an analysis in BEAUti
 
 ### Download MASCOT
-First, we have to download the package MASCOT using the BEAUTi package manager. Go to _File >> Manage Packages_ and download the package MASCOT. 
+First, we have to download the package MASCOT using the BEAUTi package manager. Go to _File >> Manage Packages_ and download the package MASCOT.
 
 <figure>
 	<a id="fig:example1"></a>
@@ -82,13 +82,13 @@ Next, we have to load the BEAUTi template from _File_, select _Template >> Masco
 
 ### Loading the Influenza A/H3N2 Sequences (Partitions)
 
-The sequence alignment is in the file [H3N2.nexus](http://github.com/nicfel/Mascot-Tutorial/raw/master/data/H3N2.nexus). Right-click on this link and save it to a folder on your computer. Once downloaded, this file can either be drag-and-dropped into BEAUti or added by using BEAUti's menu system via _File >> Import Alignment_. Once the sequences are added, we need to specify the sampling dates and locations. 
+The sequence alignment is in the file [H3N2.nexus](http://github.com/nicfel/Mascot-Tutorial/raw/master/data/H3N2.nexus). Right-click on this link and save it to a folder on your computer. Once downloaded, this file can either be drag-and-dropped into BEAUti or added by using BEAUti's menu system via _File >> Import Alignment_. Once the sequences are added, we need to specify the sampling dates and locations.
 
 ### Get the sampling times (Tip Dates)
 
 Open the "Tip Dates" panel and then select the "Use tip dates" checkbox.
 
-The sampling times are encoded in the sequence names.  We can tell BEAUti to use these by clicking the _Auto-configure_ button. The sampling times appear following the third vertical bar "|" in the sequence name. To extract these times, select "split on character", enter "|" (without the quotes) in the text box immediately to the right, and then select "3" from the drob-down box to the right, as shown in the figure below. 
+The sampling times are encoded in the sequence names.  We can tell BEAUti to use these by clicking the _Auto-configure_ button. The sampling times appear following the third vertical bar "|" in the sequence name. To extract these times, select "split on character", enter "|" (without the quotes) in the text box immediately to the right, and then select "3" from the drob-down box to the right, as shown in the figure below.
 
 <figure>
 	<a id="fig:example1"></a>
@@ -144,7 +144,7 @@ First, consider the effective population size parameter.  Since we have only a f
 
 The existing exponential distribution as a prior on the migration rate puts much weight on lower values while not prohibiting larger ones. For migration rates, a prior that prohibits too large values while not greatly distinguishing between very small and very *very* small values is generally a good choice. Be aware however that the exponential distirbution is quite an informative prior: one should be careful that to choose a mean so that feasible rates are at least within the 95% HPD interval of the prior.  (This can be determined by clicking the arrow to the left of the parameter name and looking at the values below the graph that appears on the right.)
 
-Finally, set the prior for the clock rate. We have a good idea about the clock rate of Influenza A/H3N2 Hemagglutinin. From previous work by other people, we know that the clock rate will be around 0.005 substitution per site per year. To include that prior knowledger, we can set the prior on the clock rate to a log normal distribution with mean in **real space**. To specify the mean in real space, make sure that the box *Mean In Real Space* is checked. If we set the S value to 0.25, we say that we expect the clock rate to be with 95% certainty between 0.00321 and 0.00731. 
+Finally, set the prior for the clock rate. We have a good idea about the clock rate of Influenza A/H3N2 Hemagglutinin. From previous work by other people, we know that the clock rate will be around 0.005 substitution per site per year. To include that prior knowledger, we can set the prior on the clock rate to a log normal distribution with mean in **real space**. To specify the mean in real space, make sure that the box *Mean In Real Space* is checked. If we set the S value to 0.25, we say that we expect the clock rate to be with 95% certainty between 0.00321 and 0.00731.
 <figure>
 	<a id="fig:example1"></a>
 	<img style="width:70%;" src="figures/Priors.png" alt="">
@@ -190,7 +190,7 @@ We can have a look at the marginal posterior distributions for the effective pop
 	<figcaption>Figure 9: Compare the different inferred effective population sizes.</figcaption>
 </figure>
 
-In this example, we have relatively little information about the effective population sizes of each location. This can lead to estimates that are greatly informed by the prior. Additionally, there can be great differences between median and mean estimates. The median estimates are generally more reliable since they are less influence by extreme values. 
+In this example, we have relatively little information about the effective population sizes of each location. This can lead to estimates that are greatly informed by the prior. Additionally, there can be great differences between median and mean estimates. The median estimates are generally more reliable since they are less influence by extreme values.
 
 <figure>
 	<a id="fig:example1"></a>
@@ -198,7 +198,7 @@ In this example, we have relatively little information about the effective popul
 	<figcaption>Figure 10: Differences between Mean and Meadian estimates.</figcaption>
 </figure>
 
-We can then look at the inferred migration rates. The migration rates have the label b_migration.*, meaning that they are backwards in time migration rates. The highest rates are from New York to Hong Kong. Because they are backwards in time migration rates, this means that lineages from New York are inferred to be likely from Hong Kong if we're going backwards in time. In the inferred phylogenies, we should therefore make the observation that lineages ancestral to samples from New York are inferred to be from Hong Kong backwards. 
+We can then look at the inferred migration rates. The migration rates have the label b_migration.*, meaning that they are backwards in time migration rates. The highest rates are from New York to Hong Kong. Because they are backwards in time migration rates, this means that lineages from New York are inferred to be likely from Hong Kong if we're going backwards in time. In the inferred phylogenies, we should therefore make the observation that lineages ancestral to samples from New York are inferred to be from Hong Kong backwards.
 
 A more in depth explanation of what backwards migration really are can be found here [http://popgen.sc.fsu.edu/Migrate/Blog/Entries/2013/3/22_forward-backward_migration_rates.html](http://popgen.sc.fsu.edu/Migrate/Blog/Entries/2013/3/22_forward-backward_migration_rates.html)
 
@@ -230,28 +230,44 @@ To color branches, you can go to _Appearance >> Colour by_ and select *max*. Thi
 <figcaption>Figure 13: Inferred node locations.</figcaption>
 </figure>
 
-We can now determine if lineages ancestral to samples from New York are actually inferred to be from Hong Kong, or the probability of the root being in any of the locations. 
+We can now determine if lineages ancestral to samples from New York are actually inferred to be from Hong Kong, or the probability of the root being in any of the locations.
 
-To get the actual inferred probabilities of each node being in any of the 3 locations, you can go to _Node Labels >> Display_ an then choose Hong\_Kong, New\_York or New\_Zealand. These are the actual inferred probabilities of the nodes being in any location. 
+To get the actual inferred probabilities of each node being in any of the 3 locations, you can go to _Node Labels >> Display_ an then choose Hong\_Kong, New\_York or New\_Zealand. These are the actual inferred probabilities of the nodes being in any location.
 
 It should however be mentioned that the inference of nodes being in a particular location makes some simplifying assumptions, such as that there are no other locations (i.e. apart from the sampled locations) where lineages could have been.
 
-Another important thing to know is that currently, we assume rates to be constant. This means that we assume that the population size of the different locations does not change over time. We also make the same assumption about the migration rates throught time. 
+Another important thing to know is that currently, we assume rates to be constant. This means that we assume that the population size of the different locations does not change over time. We also make the same assumption about the migration rates through time.
+
+### Errors that can occur (Work in progress)
+
+One of the errors message that can occur regularly is the following:
+`too many iterations, return negative infinity`
+This occurs when the integration step size of the ODE's to compute the probability of observing a phylogenetic tree in MASCOT is becoming too small.
+This generally occurs if at least one migration rate is really large or at least one effective population size is really small (i.e. the coalescent rate is really high).
+This causes integration steps to be extremely small, which in turn would require a lot of time to compute the probability of a phylogenetic tree under MASCOT.
+Instead of doing that, this state is rejected by assigning its log probability the value negative infinity.
+
+This error can have different origins and a likely incomplete list is the following:
+1. The priors on migration rates put too much weight on really high rates. To fix this, reconsider your priors on the migration rates. Particularly, check if the prior on the migration rates make sense in comparison to the height of the tree. If, for example, the tree has a height of 1000 years, but the prior on the migration rate is exponential with mean 1, then the prior assumption is that between any two states, we expected approximately 1000 migration events.
+2. The prior on the effective population sizes is too low, meaning that the prior on the coalescent rates (1 over the effective population size) is too high. This can for example occur when the prior on the effective population size was chosen to be 1/X. To fix, reconsider your prior on the effective population size.
+3. There is substantial changes of the effective population sizes and/or migration rates over time that are not modeled. In that case, changes in the effective population sizes or migration rates have to be explained by population structure, which can again lead to some effective population sizes being very low and some migration rates being very high. In that case, there is unfortunately not much that can be done, since MASCOT is not an appropriate model for the dataset.
+4. There is strong subpopulation structure within the different subpopulations used. In that case, reconsider if the individual sub-populations used are reasonable.
+
+
 
 ----
 
 # Useful Links
 
-If you interested in the derivations of the marginal approximation of the structured coalescent, you can find them here {% cite Mueller2017 --file Mascot-Tutorial/master-refs %}. This paper also explains the mathematical differences to other methods such as the theory underlying BASTA. To get a better idea of how the states of internal nodes are calculated, have a look in this paper {% cite mueller2017mascot --file Mascot-Tutorial/master-refs %}. 
+If you interested in the derivations of the marginal approximation of the structured coalescent, you can find them here {% cite Mueller2017 --file Mascot-Tutorial/master-refs %}. This paper also explains the mathematical differences to other methods such as the theory underlying BASTA. To get a better idea of how the states of internal nodes are calculated, have a look in this paper {% cite mueller2017mascot --file Mascot-Tutorial/master-refs %}.
 
 - MASCOT source code: [https://github.com/nicfel/Mascot](https://github.com/nicfel/Mascot)
 - [Bayesian Evolutionary Analysis with BEAST 2](http://www.beast2.org/book.html) {% cite BEAST2book2014 --file Mascot-Tutorial/master-refs.bib %}
 - BEAST 2 website and documentation: [http://www.beast2.org/](http://www.beast2.org/)
-- Join the BEAST user discussion: [http://groups.google.com/group/beast-users](http://groups.google.com/group/beast-users) 
+- Join the BEAST user discussion: [http://groups.google.com/group/beast-users](http://groups.google.com/group/beast-users)
 
 ----
 
 # Relevant References
 
 {% bibliography --cited --file Mascot-Tutorial/master-refs %}
-

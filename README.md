@@ -1,9 +1,9 @@
 ---
 author: Nicola F. Müller
 level: Intermediate
-title: MASCOT v1.2.2 Tutorial
+title: MASCOT v2.1.2 Tutorial
 subtitle: Parameter and State inference using the approximate structured coalescent
-beastversion: 2.5
+beastversion: 2.6.x
 tracerversion: 1.7.0
 figtreeversion: 1.4.2
 ---
@@ -58,12 +58,10 @@ The aim is to:
 -  Get to know how to choose the set-up of such an analysis
 -  Learn how to read the output of a MASCOT analysis
 
-
-
-
 ## Setting up an analysis in BEAUti
 
 ### Download MASCOT
+
 First, we have to download the package MASCOT using the BEAUTi package manager. Go to _File >> Manage Packages_ and download the package MASCOT.
 
 <figure>
@@ -74,21 +72,18 @@ First, we have to download the package MASCOT using the BEAUTi package manager. 
 
 MASCOT will only be available in BEAUti once you close and restart the program.
 
-
-
-### Loading the template
-Next, we have to load the BEAUTi template from _File_, select _Template >> Mascot_.
-
-
 ### Loading the Influenza A/H3N2 Sequences (Partitions)
 
-The sequence alignment is in the file [H3N2.nexus](http://github.com/nicfel/Mascot-Tutorial/raw/master/data/H3N2.nexus). Right-click on this link and save it to a folder on your computer. Once downloaded, this file can either be drag-and-dropped into BEAUti or added by using BEAUti's menu system via _File >> Import Alignment_. Once the sequences are added, we need to specify the sampling dates and locations.
+The sequence alignment is in the file [H3N2.nexus](http://github.com/nicfel/Mascot-Tutorial/raw/master/data/H3N2.nexus).
+Right-click on this link and save it to a folder on your computer.
+Once downloaded, this file can either be drag-and-dropped into BEAUti or added by using BEAUti's menu system via _File >> Import Alignment_.
+Once the sequences are added, we need to specify the sampling dates and locations.
 
 ### Get the sampling times (Tip Dates)
 
 Open the "Tip Dates" panel and then select the "Use tip dates" checkbox.
 
-The sampling times are encoded in the sequence names.  We can tell BEAUti to use these by clicking the _Auto-configure_ button. The sampling times appear following the third vertical bar "|" in the sequence name. To extract these times, select "split on character", enter "|" (without the quotes) in the text box immediately to the right, and then select "3" from the drob-down box to the right, as shown in the figure below.
+The sampling times are encoded in the sequence names.  We can tell BEAUti to use these by clicking the _Auto-configure_ button. The sampling times appear following the third vertical bar "|" in the sequence name. To extract these times, select "split on character", enter "|" (without the quotes) in the text box immediately to the right, and then select "3" from the drop-down box to the right, as shown in the figure below.
 
 <figure>
 	<a id="fig:example1"></a>
@@ -98,26 +93,13 @@ The sampling times are encoded in the sequence names.  We can tell BEAUti to use
 
 Clicking "Ok" should now populate the table with the sample times extracted from the sequence names: the column **Date** should now have values between 2000 and 2002 and the column **Height** should have values from 0 to 2. The heights denote the time difference from a sequence to the most recently sampled sequence. If everything is specified correctly, the sequence with Height 0.0 should have Date 2001.9. Next, the sampling locations need to be specified.
 
-### Get the sampling locations (Tip Locations)
-
-As for the sampling times, sampling locations can be extracted from
-the sequence names.  Select the "Tip Locations" panel.  Initially the
-column **Location** should be NOT_SET for every sequence.  After
-clicking the _Guess_ button, you can split the sequence on the
-vertical bar "|" again by selecting "split on character" and entering
-"|" in the box. However, the locations are in the fourth group, so
-this time choose "4" from the drop-down menu. After clicking the _OK_
-button, the window should look like the one shown in the figure below:
-
-<figure>
-	<a id="fig:example1"></a>
-	<img style="width:70%;" src="figures/TipLocations.png" alt="">
-	<figcaption>Figure 3: Configuring sample locations.</figcaption>
-</figure>
-
 ### Specify the Site Model (Site Model)
 
-Next, we have to specify the site model. To do this, choose the "Site Model" tab. For Influenza Hemagluttanin sequences as we have here, HKY is the most commonly used model of nucleotide evolution. This model allows for differences in transversion and transition rates, meaning that changes between bases that are chemically more closely related (transitions) are allowed to have a different rate to changes between bases that chemically more distinct (transversions). Additionally, we should allow for different rate categories for different sires in the alignment. This can be done by setting the _Gamma Category Count_ to 4, which is just a value that has typically been used. Make sure that estimate is checked next to the shape parameter. To reduce the number of parameters we have to estimate, we can set Frequencies to Empirical.
+Next, we have to specify the site model.
+To do this, choose the "Site Model" tab.
+For Influenza Hemagluttanin sequences as we have here, HKY is the most commonly used model of nucleotide evolution. This model allows for differences in transversion and transition rates, meaning that changes between bases that are chemically more closely related (transitions) are allowed to have a different rate to changes between bases that chemically more distinct (transversions).
+Additionally, we should allow for different rate categories for different sires in the alignment.
+This can be done by setting the _Gamma Category Count_ to 4, which is just a value that has typically been used. Make sure that estimate is checked next to the shape parameter. To reduce the number of parameters we have to estimate, we can set Frequencies to Empirical.
 
 <figure>
 	<a id="fig:example1"></a>
@@ -137,6 +119,22 @@ For rapidly evolving viruses, the assumption of a strict molecular clock is ofte
 </figure>
 
 ### Specify the priors (Priors)
+
+We first have to choose the tree prior, which in this case is MASCOT.
+To do so, search the drop down menu next to `Tree.t:H3N2` and choose MASCOT.
+By default, the rate dynamics for this setting is `Constant`, which means that effective population sizes and migration rates are assumed to be constant through time.
+We next have to define the sampling location of the individual tips.
+
+Initially the column **Location** should be NOT_SET for every sequence.  
+After clicking the _Guess_ button, you can split the sequence on the vertical bar "|" again by selecting "split on character" and entering "|" in the box. However, the locations are in the fourth group, so this time choose "4" from the drop-down menu.
+After clicking the _OK_ button, the window should look like the one shown in the figure below:
+
+<figure>
+	<a id="fig:example1"></a>
+	<img style="width:70%;" src="figures/TipLocations.png" alt="">
+	<figcaption>Figure 3: Configuring sample locations.</figcaption>
+</figure>
+
 
 Now, we need to set the priors for the various parameters of the model. We do this by switching to the "Priors" tab.
 
@@ -165,7 +163,7 @@ as_.
 <figure>
 	<a id="fig:example1"></a>
 	<img style="width:70%;" src="figures/MCMC.png" alt="">
-	<figcaption>Figure 7: save the *.xml.</figcaption>
+	<figcaption>Figure 7: save the \*.xml.</figcaption>
 </figure>
 
 ### Run the Analysis using BEAST2

@@ -138,9 +138,9 @@ After clicking the _OK_ button, the window should look like the one shown in the
 
 Now, we need to set the priors for the various parameters of the model. We do this by switching to the "Priors" tab.
 
-First, consider the effective population size parameter.  Since we have only a few samples per location, meaning little information about the different effective population sizes, we will need an informative prior. In this case we will use a log normal prior with parameters M=0 and S=1.  (These are respectively the mean and variance of the corresponding normal distribution in log space.)  To use this prior, choose "Log Normal" from the dropdown menu to the right of the Ne.t:H3N2 parameter label, then click the arrow to the left of the same label and fill in the parameter values appropriately (i.e. M=0 and S=1). Ensure that the "mean in real space" checkbox remains unchecked.
+First, consider the effective population size parameter.  Since we have only a few samples per location, meaning little information about the different effective population sizes, we will need an informative prior. In this case we will use a log normal prior with parameters M=0 and S=1.  (These are respectively the mean and variance of the corresponding normal distribution in log space.) To use this prior, choose "Log Normal" from the dropdown menu to the right of the Ne.t:H3N2 parameter label, then click the arrow to the left of the same label and fill in the parameter values appropriately (i.e. M=0 and S=1). Ensure that the "mean in real space" checkbox remains unchecked.
 
-The existing exponential distribution as a prior on the migration rate puts much weight on lower values while not prohibiting larger ones. For migration rates, a prior that prohibits too large values while not greatly distinguishing between very small and very *very* small values is generally a good choice. Be aware however that the exponential distirbution is quite an informative prior: one should be careful that to choose a mean so that feasible rates are at least within the 95% HPD interval of the prior.  (This can be determined by clicking the arrow to the left of the parameter name and looking at the values below the graph that appears on the right.)
+The existing exponential distribution as a prior on the migration rate puts much weight on lower values while not prohibiting larger ones. For migration rates, a prior that prohibits too large values while not greatly distinguishing between very small and very *very* small values is generally a good choice. Be aware however that the exponential distribution is quite an informative prior: one should be careful that to choose a mean so that feasible rates are at least within the 95% HPD interval of the prior.  (This can be determined by clicking the arrow to the left of the parameter name and looking at the values below the graph that appears on the right.)
 
 Finally, set the prior for the clock rate. We have a good idea about the clock rate of Influenza A/H3N2 Hemagglutinin. From previous work by other people, we know that the clock rate will be around 0.005 substitution per site per year. To include that prior knowledger, we can set the prior on the clock rate to a log normal distribution with mean in **real space**. To specify the mean in real space, make sure that the box *Mean In Real Space* is checked. If we set the S value to 0.25, we say that we expect the clock rate to be with 95% certainty between 0.00321 and 0.00731.
 <figure>
@@ -193,17 +193,17 @@ In this example, we have relatively little information about the effective popul
 <figure>
 	<a id="fig:example1"></a>
 	<img style="width:70%;" src="figures/MeanMedian.png" alt="">
-	<figcaption>Figure 10: Differences between Mean and Meadian estimates.</figcaption>
+	<figcaption>Figure 10: Differences between mean and median estimates.</figcaption>
 </figure>
 
-We can then look at the inferred migration rates. The migration rates have the label b_migration.*, meaning that they are backwards in time migration rates. The highest rates are from New York to Hong Kong. Because they are backwards in time migration rates, this means that lineages from New York are inferred to be likely from Hong Kong if we're going backwards in time. In the inferred phylogenies, we should therefore make the observation that lineages ancestral to samples from New York are inferred to be from Hong Kong backwards.
+We can then look at the inferred migration rates. The migration rates have the label b_migration.\*, meaning that they are backwards in time migration rates. The highest rates are from New York to Hong Kong. Because they are backwards in time migration rates, this means that lineages from New York are inferred to be likely from Hong Kong if we're going backwards in time. In the inferred phylogenies, we should therefore make the observation that lineages ancestral to samples from New York are inferred to be from Hong Kong backwards.
 
 A more in depth explanation of what backwards migration really are can be found here [http://popgen.sc.fsu.edu/Migrate/Blog/Entries/2013/3/22_forward-backward_migration_rates.html](http://popgen.sc.fsu.edu/Migrate/Blog/Entries/2013/3/22_forward-backward_migration_rates.html)
 
 <figure>
 	<a id="fig:example1"></a>
 	<img style="width:70%;" src="figures/LogMigration.png" alt="">
-	<figcaption>Figure 11: Compare the inferrred migration rates.</figcaption>
+	<figcaption>Figure 11: Compare the inferred migration rates.</figcaption>
 </figure>
 
 ### Make the MCC tree using TreeAnnotator
@@ -250,7 +250,6 @@ This error can have different origins and a likely incomplete list is the follow
 2. The prior on the effective population sizes is too low, meaning that the prior on the coalescent rates (1 over the effective population size) is too high. This can for example occur when the prior on the effective population size was chosen to be 1/X. To fix, reconsider your prior on the effective population size.
 3. There is substantial changes of the effective population sizes and/or migration rates over time that are not modeled. In that case, changes in the effective population sizes or migration rates have to be explained by population structure, which can again lead to some effective population sizes being very low and some migration rates being very high. In that case, there is unfortunately not much that can be done, since MASCOT is not an appropriate model for the dataset.
 4. There is strong subpopulation structure within the different subpopulations used. In that case, reconsider if the individual sub-populations used are reasonable.
-
 
 
 ----

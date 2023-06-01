@@ -213,7 +213,7 @@ A more in depth explanation of what backwards migration really are can be found 
 
 ### Make the MCC tree using TreeAnnotator
 
-Next, we want to summarize the trees. This we can do using TreeAnnotator. Open the program and then set the options as below. You have to specify the _Burnin percentage_, the _Node heights_, _Input Tree File_ and the _Output File_. After clicking _Run_ the program should summarize the trees.
+Next, we want to summarize the trees. This we can do using TreeAnnotator. Open the program and then set the options as below. You have to specify the _Burnin percentage_, the _Node heights_, _Input Tree File_ and the _Output File_. Use the typed trees in the file `H3N2.H32.trees`  as _Input Tree File_. After clicking _Run_ the program should summarize the trees.
 
 <figure>
 	<a id="fig:example1"></a>

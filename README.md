@@ -1,11 +1,11 @@
 ---
 author: Nicola F. Müller
 level: Intermediate
-title: MASCOT v2.1.2 Tutorial
+title: MASCOT v3.0.0 Tutorial
 subtitle: Parameter and State inference using the approximate structured coalescent
-beastversion: 2.6.x
-tracerversion: 1.7.0
-figtreeversion: 1.4.2
+beastversion: 2.7.x
+tracerversion: 1.7.2
+figtreeversion: 1.4.4
 ---
 
 

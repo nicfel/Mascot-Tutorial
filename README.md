@@ -1,11 +1,11 @@
 ---
 author: Nicola F. Müller
 level: Intermediate
-title: MASCOT v2.1.2 Tutorial
+title: MASCOT v3.0.0 Tutorial
 subtitle: Parameter and State inference using the approximate structured coalescent
-beastversion: 2.6.x
-tracerversion: 1.7.0
-figtreeversion: 1.4.2
+beastversion: 2.7.x
+tracerversion: 1.7.2
+figtreeversion: 1.4.4
 ---
 
 
@@ -77,7 +77,7 @@ MASCOT will only be available in BEAUti once you close and restart the program.
 The sequence alignment is in the file [H3N2.nexus](http://github.com/nicfel/Mascot-Tutorial/raw/master/data/H3N2.nexus).
 Right-click on this link and save it to a folder on your computer.
 Once downloaded, this file can either be drag-and-dropped into BEAUti or added by using BEAUti's menu system via _File >> Import Alignment_.
-Once the sequences are added, we need to specify the sampling dates and locations.
+Once the sequences are added, we need to specify the sampling dates.
 
 ### Get the sampling times (Tip Dates)
 
@@ -91,14 +91,14 @@ The sampling times are encoded in the sequence names.  We can tell BEAUti to use
 	<figcaption>Figure 2: Guess sampling times.</figcaption>
 </figure>
 
-Clicking "Ok" should now populate the table with the sample times extracted from the sequence names: the column **Date** should now have values between 2000 and 2002 and the column **Height** should have values from 0 to 2. The heights denote the time difference from a sequence to the most recently sampled sequence. If everything is specified correctly, the sequence with Height 0.0 should have Date 2001.9. Next, the sampling locations need to be specified.
+Clicking "Ok" should now populate the table with the sample times extracted from the sequence names: the column **Date** should now have values between 2000 and 2002 and the column **Height** should have values from 0 to 2. The heights denote the time difference from a sequence to the most recently sampled sequence. If everything is specified correctly, the sequence with Height 0.0 should have Date 2001.9. 
 
 ### Specify the Site Model (Site Model)
 
 Next, we have to specify the site model.
 To do this, choose the "Site Model" tab.
 For Influenza Hemagluttanin sequences as we have here, HKY is the most commonly used model of nucleotide evolution. This model allows for differences in transversion and transition rates, meaning that changes between bases that are chemically more closely related (transitions) are allowed to have a different rate to changes between bases that chemically more distinct (transversions).
-Additionally, we should allow for different rate categories for different sires in the alignment.
+Additionally, we should allow for different rate categories for different sites in the alignment.
 This can be done by setting the _Gamma Category Count_ to 4, which is just a value that has typically been used. Make sure that estimate is checked next to the shape parameter. To reduce the number of parameters we have to estimate, we can set Frequencies to Empirical.
 
 <figure>
@@ -118,10 +118,10 @@ For rapidly evolving viruses, the assumption of a strict molecular clock is ofte
 	<figcaption>Figure 5: Set the initial clock rate.</figcaption>
 </figure>
 
-### Specify the priors (Priors)
 
-We first have to choose the tree prior, which in this case is MASCOT.
-To do so, search the drop down menu next to `Tree.t:H3N2` and choose MASCOT.
+### Get the sampling locations (Tip Locations)
+
+We first have to choose the tree prior, which in this case is MASCOT. We do this by switching to the "Priors" tab. Search the drop down menu next to `Tree.t:H3N2` and choose MASCOT.
 By default, the rate dynamics for this setting is `Constant`, which means that effective population sizes and migration rates are assumed to be constant through time.
 We next have to define the sampling location of the individual tips.
 
@@ -136,19 +136,23 @@ After clicking the _OK_ button, the window should look like the one shown in the
 </figure>
 
 
-Now, we need to set the priors for the various parameters of the model. We do this by switching to the "Priors" tab.
+### Specify the priors (Priors)
 
-First, consider the effective population size parameter.  Since we have only a few samples per location, meaning little information about the different effective population sizes, we will need an informative prior. In this case we will use a log normal prior with parameters M=0 and S=1.  (These are respectively the mean and variance of the corresponding normal distribution in log space.) To use this prior, choose "Log Normal" from the dropdown menu to the right of the Ne.t:H3N2 parameter label, then click the arrow to the left of the same label and fill in the parameter values appropriately (i.e. M=0 and S=1). Ensure that the "mean in real space" checkbox remains unchecked.
+Now, we need to set the priors for the various parameters of the model. You can find the parameter priors below the tree prior.
 
-The existing exponential distribution as a prior on the migration rate puts much weight on lower values while not prohibiting larger ones. For migration rates, a prior that prohibits too large values while not greatly distinguishing between very small and very *very* small values is generally a good choice. Be aware however that the exponential distribution is quite an informative prior: one should be careful that to choose a mean so that feasible rates are at least within the 95% HPD interval of the prior.  (This can be determined by clicking the arrow to the left of the parameter name and looking at the values below the graph that appears on the right.)
+First, consider the effective population size parameter _Ne_. Since we have only a few samples per location, meaning little information about the different effective population sizes, we will need an informative prior. In this case we will use a log normal prior with parameters M=0 and S=1. (These are respectively the mean and variance of the corresponding normal distribution in log space.) To use this prior, choose "Log Normal" from the drop down menu to the right of the `Ne.t:H3N2` parameter label, then click the arrow to the left of the same label and fill in the parameter values appropriately (i.e. M=0 and S=1). Ensure that the "Mean In Real Space" checkbox remains unchecked.
 
-Finally, set the prior for the clock rate. We have a good idea about the clock rate of Influenza A/H3N2 Hemagglutinin. From previous work by other people, we know that the clock rate will be around 0.005 substitution per site per year. To include that prior knowledger, we can set the prior on the clock rate to a log normal distribution with mean in **real space**. To specify the mean in real space, make sure that the box *Mean In Real Space* is checked. If we set the S value to 0.25, we say that we expect the clock rate to be with 95% certainty between 0.00321 and 0.00731.
+The existing exponential distribution as a prior on the migration rate puts much weight on lower values while not prohibiting larger ones. For migration rates, a prior that prohibits too large values while not greatly distinguishing between very small and very *very* small values is generally a good choice. Be aware however that the exponential distribution is quite an informative prior: one should be careful that to choose a mean so that feasible rates are at least within the 95% HPD interval of the prior.  (This can be determined by clicking the arrow to the left of the parameter name and looking at the values below the graph that appears on the right.) We keep the default mean value of 1.
+
+Finally, set the prior for the clock rate. We have a good idea about the clock rate of Influenza A/H3N2 Hemagglutinin. From previous work by other people, we know that the clock rate will be around 0.005 substitution per site per year. To include that prior knowledge, we can set the prior on the clock rate to a Log Normal distribution with mean in **real space** set to 0.005. To specify the mean in real space, make sure that the box "Mean In Real Space" is checked. If we set the S value to 0.25, we say that we expect the clock rate to be with 95% certainty between 0.00321 and 0.00731.
+
 <figure>
 	<a id="fig:example1"></a>
 	<img style="width:70%;" src="figures/Priors.png" alt="">
 	<figcaption>Figure 6: Set up of the prior distributions.</figcaption>
 </figure>
 
+We keep the default priors for the parameters gammaShape and kappa.
 
 ### Specify the MCMC chain length (MCMC)
 
@@ -156,8 +160,9 @@ Now switch to the "MCMC" tab. Here we can set the length of the MCMC
 chain and decide how frequently the parameter and trees are
 logged. For this dataset, 2 million iterations should be
 sufficient. In order to have enough samples but not create too large
-files, we can set the logEvery to 5000, so we have 401 samples
-overall. Next, we have to save the `*.xml` file using _File >> Save
+files, we can set the logEvery to 2000, so we have 1001 samples
+overall. Do this for the tracelog and the treelog. 
+Next, we have to save the `*.xml` file using _File >> Save
 as_.
 
 <figure>
@@ -208,7 +213,7 @@ A more in depth explanation of what backwards migration really are can be found 
 
 ### Make the MCC tree using TreeAnnotator
 
-Next, we want to summarize the trees. This we can do using TreeAnnotator. Open the program and then set the options as below. You have to specify the _Burnin percentage_, the _Node heights_, _Input Tree File_ and the _Output File_. After clicking _Run_ the program should summarize the trees.
+Next, we want to summarize the trees. This we can do using TreeAnnotator. Open the program and then set the options as below. You have to specify the _Burnin percentage_, the _Node heights_, _Input Tree File_ and the _Output File_. Use the typed trees in the file `H3N2.H32.trees`  as _Input Tree File_. After clicking _Run_ the program should summarize the trees.
 
 <figure>
 	<a id="fig:example1"></a>
